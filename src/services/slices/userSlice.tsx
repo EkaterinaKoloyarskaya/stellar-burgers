@@ -28,7 +28,7 @@ const initialState: TUserState = {
 };
 
 export const getUser = createAsyncThunk('user', async () => getUserApi());
-export const getLoginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (data: TLoginData) => {
     const response = await loginUserApi(data);
@@ -37,7 +37,7 @@ export const getLoginUser = createAsyncThunk(
     return response;
   }
 );
-export const getRegisterUser = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (data: TRegisterData) => {
     const response = await registerUserApi(data);
@@ -46,20 +46,20 @@ export const getRegisterUser = createAsyncThunk(
     return response;
   }
 );
-export const getLogoutUser = createAsyncThunk('user/logoutUser', async () => {
+export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   await logoutApi();
   deleteCookie('accessToken');
   localStorage.removeItem('refreshToken');
 });
-export const getUpdateUser = createAsyncThunk(
+export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (data: Partial<TRegisterData>) => updateUserApi(data)
 );
-export const getForgotPassword = createAsyncThunk(
+export const forgotPassword = createAsyncThunk(
   'user/forgotUser',
   async (data: { email: string }) => forgotPasswordApi(data)
 );
-export const getResetPassword = createAsyncThunk(
+export const resetPassword = createAsyncThunk(
   'user/resetUser',
   async (data: { password: string; token: string }) => resetPasswordApi(data)
 );
@@ -90,87 +90,87 @@ export const userSlice = createSlice({
         state.isAuthChecked = true;
       })
 
-      .addCase(getLoginUser.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getLoginUser.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
       })
-      .addCase(getLoginUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
         state.isAuthChecked = true;
       })
 
-      .addCase(getRegisterUser.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getRegisterUser.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
         state.isAuthChecked = false;
       })
-      .addCase(getRegisterUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
         state.isAuthChecked = true;
       })
 
-      .addCase(getLogoutUser.pending, (state) => {
+      .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getLogoutUser.rejected, (state, action) => {
+      .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
         state.isAuthChecked = false;
       })
-      .addCase(getLogoutUser.fulfilled, (state) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthChecked = true;
       })
 
-      .addCase(getUpdateUser.pending, (state) => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getUpdateUser.rejected, (state, action) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
         state.isAuthChecked = false;
       })
-      .addCase(getUpdateUser.fulfilled, (state, action) => {
+      .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
       })
 
-      .addCase(getForgotPassword.pending, (state) => {
+      .addCase(forgotPassword.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getForgotPassword.rejected, (state, action) => {
+      .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
         state.isAuthChecked = false;
       })
-      .addCase(getForgotPassword.fulfilled, (state) => {
+      .addCase(forgotPassword.fulfilled, (state) => {
         state.isLoading = false;
       })
 
-      .addCase(getResetPassword.pending, (state) => {
+      .addCase(resetPassword.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getResetPassword.rejected, (state, action) => {
+      .addCase(resetPassword.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
         state.isAuthChecked = false;
       })
-      .addCase(getResetPassword.fulfilled, (state) => {
+      .addCase(resetPassword.fulfilled, (state) => {
         state.isLoading = false;
       });
   }

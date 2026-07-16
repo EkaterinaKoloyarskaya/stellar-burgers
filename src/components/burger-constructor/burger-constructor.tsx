@@ -2,10 +2,7 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import {
-  clearOrderModal,
-  getOrderBurger
-} from '../../services/slices/orderSlice';
+import { clearOrderModal, orderBurger } from '../../services/slices/orderSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
@@ -33,7 +30,7 @@ export const BurgerConstructor: FC = () => {
       ...constructorItems.ingredients.map((ingredient) => ingredient._id),
       constructorItems.bun._id
     ];
-    dispatch(getOrderBurger(ingredients));
+    dispatch(orderBurger(ingredients));
   };
 
   const closeOrderModal = () => {

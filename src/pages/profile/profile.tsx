@@ -1,7 +1,7 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { getUpdateUser } from '../../services/slices/userSlice';
+import { updateUser } from '../../services/slices/userSlice';
 
 export const Profile: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -32,7 +32,7 @@ export const Profile: FC = () => {
 
     if (formValue) {
       dispatch(
-        getUpdateUser({
+        updateUser({
           name: formValue.name || '',
           email: formValue.email || '',
           password: formValue.password || ''
