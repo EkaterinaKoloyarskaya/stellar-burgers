@@ -29,16 +29,13 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-
-    if (formValue) {
-      dispatch(
-        updateUser({
-          name: formValue.name || '',
-          email: formValue.email || '',
-          password: formValue.password || ''
-        })
-      );
-    }
+    dispatch(
+      updateUser({
+        name: formValue.name || '',
+        email: formValue.email || '',
+        password: formValue.password || ''
+      })
+    );
   };
 
   const handleCancel = (e: SyntheticEvent) => {
