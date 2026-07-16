@@ -6,10 +6,9 @@ import { clearOrderModal, orderBurger } from '../../services/slices/orderSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
-  const selectConstructor = (state: RootState) => state.burgerConstructor;
-
-  const constructor = useSelector(selectConstructor);
-  const constructorItems = constructor;
+  const constructorItems = useSelector(
+    (state: RootState) => state.burgerConstructor
+  );
 
   const dispatch = useDispatch();
   const { orderRequest, orderModalData } = useSelector(
