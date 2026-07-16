@@ -14,9 +14,7 @@ export const OrderInfo: FC = () => {
     dispatch(getOrderByNumber(Number(number)));
   }, [number]);
 
-  const orderData = useSelector(
-    (state: RootState) => state.order.orderModalData
-  );
+  const orderData = useSelector((state: RootState) => state.order.orderDetails);
   const ingredients = useSelector(
     (state: RootState) => state.ingredient.ingredients
   );

@@ -5,6 +5,7 @@ import { TOrder } from '@utils-types';
 type TOrderState = {
   orders: TOrder[];
   orderModalData: TOrder | null;
+  orderDetails: TOrder | null;
   orderRequest: boolean;
   isLoading: boolean;
   error: string | null;
@@ -13,6 +14,7 @@ type TOrderState = {
 const initialState: TOrderState = {
   orders: [],
   orderModalData: null,
+  orderDetails: null,
   orderRequest: false,
   isLoading: false,
   error: null
@@ -66,7 +68,7 @@ export const orderSlice = createSlice({
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.orderModalData = action.payload.orders[0];
+        state.orderDetails = action.payload.orders[0];
       })
 
       .addCase(getOrders.pending, (state) => {
