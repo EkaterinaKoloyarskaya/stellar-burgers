@@ -19,6 +19,7 @@ import { useDispatch } from '../../services/store';
 import { getCookie } from '../../utils/cookie';
 import { getUser, logout } from '../../services/slices/userSlice';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { getIngredients } from '../../services/slices/ingredientsSlice';
 
 export const App = (): ReactElement => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const App = (): ReactElement => {
     } else {
       dispatch(logout());
     }
+    dispatch(getIngredients());
   }, []);
 
   const location = useLocation();
