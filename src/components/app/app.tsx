@@ -13,7 +13,13 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useMatch
+} from 'react-router-dom';
 import { ReactElement, useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getCookie } from '../../utils/cookie';
@@ -35,7 +41,11 @@ export const App = (): ReactElement => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const backgroundLocation = location.state?.backgroundLocation;
+  const matchFeedOrder = useMatch('/feed/:number');
+  const matchProfileOrder = useMatch('/profile/orders/:number');
+  const orderNumber =
+    matchFeedOrder?.params.number ?? matchProfileOrder?.params.number;
+  const backgroundLocation = location.state?.background;
 
   const handleModalClose = () => navigate(-1);
 
@@ -46,7 +56,19 @@ export const App = (): ReactElement => {
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <div className={styles.detailPageWrap}>
+              <h1
+                className={`${styles.detailHeader} text text_type_main-large mb-5`}
+              >
+                Детали ингредиента
+              </h1>
+              <IngredientDetails />
+            </div>
+          }
+        />
         <Route
           path='/profile/orders/:number'
           element={
@@ -111,7 +133,12 @@ export const App = (): ReactElement => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='' onClose={handleModalClose}>
+              <Modal
+                title={
+                  <span className='text text_type_digits-default'>{`#${orderNumber}`}</span>
+                }
+                onClose={handleModalClose}
+              >
                 <OrderInfo />
               </Modal>
             }
@@ -119,7 +146,7 @@ export const App = (): ReactElement => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='' onClose={handleModalClose}>
+              <Modal title='Детали ингредиента' onClose={handleModalClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -127,7 +154,12 @@ export const App = (): ReactElement => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='' onClose={handleModalClose}>
+              <Modal
+                title={
+                  <span className='text text_type_digits-default'>{`#${orderNumber}`}</span>
+                }
+                onClose={handleModalClose}
+              >
                 <OrderInfo />
               </Modal>
             }
