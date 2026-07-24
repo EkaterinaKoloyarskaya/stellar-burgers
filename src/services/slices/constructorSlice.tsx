@@ -7,7 +7,7 @@ type TConstructorState = {
   ingredients: TConstructorIngredient[];
 };
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   bun: null,
   ingredients: []
 };
@@ -33,7 +33,8 @@ export const constructorSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(orderBurger.fulfilled, (state) => {
+    builder
+    .addCase(orderBurger.fulfilled, (state) => {
       state.ingredients = [];
       state.bun = null;
     });
