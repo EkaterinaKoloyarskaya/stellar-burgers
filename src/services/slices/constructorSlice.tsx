@@ -33,8 +33,7 @@ export const constructorSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder
-    .addCase(orderBurger.fulfilled, (state) => {
+    builder.addCase(orderBurger.fulfilled, (state) => {
       state.ingredients = [];
       state.bun = null;
     });
