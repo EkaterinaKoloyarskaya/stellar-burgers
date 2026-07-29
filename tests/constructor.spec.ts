@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
 //     update: false, 
 //   });
 
-//   await page.goto('http://localhost:4000/');
+//   await page.goto('/');
 //   await page.waitForResponse('**/api/ingredients');
 // })
 
@@ -21,12 +21,12 @@ import { test, expect } from '@playwright/test';
 //     update: false
 //   });
 
-//   await page.goto('http://localhost:4000/login');
+//   await page.goto('/login');
 //   await page.locator('input[name="email"]').fill('katya@yandex.ru');
 //   await page.locator('input[name="password"]').fill('12345');
 //   await page.getByText('Войти').click();
 
-//   await page.waitForURL('http://localhost:4000/');
+//   await page.waitForURL('/');
 
 //   await page.reload();
 //   await page.waitForTimeout(2000);
@@ -54,7 +54,7 @@ test.describe('Конструктор бургера', () => {
       url: '**/api/ingredients'
     })
 
-    await page.goto('http://localhost:4000/');
+    await page.goto('/');
     await expect(page.getByText('Краторная булка N-200i')).toBeVisible();
   });
 
@@ -141,7 +141,7 @@ test.describe('Оформление заказа', () => {
       url: '**/orders'
     });
 
-    await page.goto('http://localhost:4000/');
+    await page.goto('/');
     await expect(page.getByText('Краторная булка N-200i')).toBeVisible();
   });
 
@@ -156,14 +156,20 @@ test.describe('Оформление заказа', () => {
   
     await page.getByTestId(`ingredient-${mainId}`).getByText('Добавить').click({ force: true });
     await expect(constructorSection.getByText('Мини-салат Экзо-Плантаго')).toBeVisible();
+
+    const responsePromise = page.waitForResponse('**/api/orders');
   
     await page.getByText('Оформить заказ').click();
+    const response = await responsePromise;
+    const data = await response.json();
   
     const modal = page.getByTestId('modal');
     await expect(modal).toBeVisible();
-    await expect(modal.getByText('108598')).toBeVisible();
+    await expect(modal.getByText(String(data.order.number))).toBeVisible();
   
     await expect(constructorSection.getByText('Выберите булки').first()).toBeVisible();
+    await expect(
+      constructorSection.getByText('Выберите начинку')).toBeVisible();
   
     await page.getByTestId('modal-close').click();
     await expect(modal).toBeHidden();
