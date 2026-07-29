@@ -11,7 +11,7 @@ import { orderBurger } from './orderSlice';
 
 describe('[constructorSlice] тест конструктора бургера', () => {
   test('возвращает initialState для неизвестного экшена', () => {
-    const state = constructorSlice.reducer(initialState, { type: 'UNKNOWN' });
+    const state = constructorSlice.reducer(undefined, { type: 'UNKNOWN' });
     expect(state).toEqual(initialState);
   });
 
