@@ -94,8 +94,18 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier ./src --write",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "playwright test"
   },
+  "jest": {
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/tests/"
+  ],
+  "moduleNameMapper": {
+    "^@api$": "<rootDir>/src/utils/burger-api.ts"
+  }
+},
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
