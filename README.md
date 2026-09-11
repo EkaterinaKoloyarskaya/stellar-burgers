@@ -3,7 +3,6 @@
 **Stellar Burgers** — учебное веб-приложение для заказа бургеров. Выбирайте ингредиенты, собирайте свой вариант и оформляйте заказ. В личном кабинете можно редактировать профиль и просматривать историю заказов, а в общей ленте — следить за их статусами.
 
 ## Технологический стек:
-
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
@@ -11,8 +10,7 @@
 ![CSS Modules](https://img.shields.io/badge/CSS_Modules-1572B6?style=for-the-badge&logo=cssmodules&logoColor=white)
 ![Webpack](https://img.shields.io/badge/Webpack-2B3A42?style=for-the-badge&logo=webpack&logoColor=8DD6F9)
 
-### Тестирование и компоненты
-
+### Тестирование и компоненты:
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge)
 ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
@@ -20,7 +18,7 @@
 Jest проверяет логику приложения, Playwright — пользовательские сценарии в браузере. Компоненты представлены в Storybook.
 
 
-## Основной функционал
+## Основной функционал:
 - Конструктор бургера: выбор булки, добавление и удаление ингредиентов с автоматическим расчётом стоимости.
 - Детали ингредиентов: изображение, состав и пищевая ценность в модальном окне.
 - Оформление заказа: отправка на сервер, получение номера и очистка конструктора.
